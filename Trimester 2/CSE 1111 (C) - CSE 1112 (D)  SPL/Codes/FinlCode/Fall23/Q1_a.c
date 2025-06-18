@@ -21,7 +21,7 @@ void updateBalance(float *customers, int id, int transType, int transAmount)
 {
     switch(transType) {
     case 1:
-        if (customers[id] < transAmount) puts("Insufficient found!");
+        if (customers[id] < transAmount) puts("Insufficient funds!");
         else {
             customers[id] -= transAmount;
             printf("Transaction successful!\n");
