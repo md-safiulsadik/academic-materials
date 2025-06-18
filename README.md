@@ -45,9 +45,6 @@ Each course folder may contain:
 
 ## 📄 License
 
-All notes, code, and resources in this repository are © 2025 [Md Safiul Kafi Sadik](https://github.com/md-safiulsadik).  
-They are provided for **educational and personal use only**. Do not reuse, republish, or submit without permission.
+This repository is licensed under the 
+[Creative Commons BY-NC-SA 4.0 License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
----
-
-> _“Organize your learning, and your future self will thank you.”_ ✨
