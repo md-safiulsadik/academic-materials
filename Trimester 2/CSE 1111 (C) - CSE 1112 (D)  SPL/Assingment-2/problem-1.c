@@ -1,11 +1,11 @@
 #include <stdio.h>
 
 int getSize(char str[]) {
-    int lenght = 0, i = 0;
+    int length = 0, i = 0;
     while (str[i] != '\0') {
         i++;
-        lenght += 1;
-    } return lenght;
+        length += 1;
+    } return length;
 }
 
 void removeAllDuplicates(char str[]) {
