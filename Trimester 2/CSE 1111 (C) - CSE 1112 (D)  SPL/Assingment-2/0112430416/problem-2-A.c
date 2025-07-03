@@ -16,7 +16,7 @@ void fallingStudent(struct Students st[]);
 
 
 void fallingStudent(struct Students st[]) {
-    int totalFailedStudet = 0;
+    int totalFailedStudent = 0;
 
     for (int i = 0; i < st_index; i++) {
         int count = 0;
@@ -26,14 +26,14 @@ void fallingStudent(struct Students st[]) {
             if (st[i].marks[j] < 40) {
                 isFailed = 1;
                 count++;
-                totalFailedStudet++;
+                totalFailedStudent++;
             }
         }
         if (isFailed) {
             printf("ID: %d, Name: %s, Failed Subject: %d\n", st[i].id, st[i].name, count);
         }
     }
-    if (!totalFailedStudet)
+    if (!totalFailedStudent)
         puts("No Student Failed :)!");
 }
 
