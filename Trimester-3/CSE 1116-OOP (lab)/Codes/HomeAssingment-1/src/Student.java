@@ -6,7 +6,7 @@ public class Student {
     public Student(int id, String name, int[] marks) {
         this.id = id;
         this.name = name;
-        this.marks = new int[3];
+        this.marks = marks.clone();
     }
 
     public double calculateAverage() {
@@ -17,8 +17,8 @@ public class Student {
         return (double) sum / 3;
     }
 
-    public void printDetails() {
-        System.out.println
-        ("Student ID: " + this.id + " Name: " + this.name + " Marks: " + this.marks[0] + " " + this.marks[1] + " " + this.marks[2] + " Average: " + this.calculateAverage());
+    @Override
+    public String toString() {
+       return ("Student ID: " + this.id + " Name: " + this.name + " Marks: " + this.marks[0] + " " + this.marks[1] + " " + this.marks[2] + " Average: " + this.calculateAverage());
     }
 }
