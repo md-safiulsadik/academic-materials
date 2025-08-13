@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Number System Exam Questions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .latex {
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+        }
+        .question-card {
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .answer-block {
+            background-color: #f8fafc;
+            border-left: 4px solid #4f46e5;
+            margin-top: 1rem;
+            padding: 1rem;
+        }
+        .gemini-output {
+            background-color: #eef2ff;
+            border-left: 4px solid #818cf8;
+            margin-top: 1rem;
+            padding: 1rem;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4f46e5;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-top: 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container mx-auto p-4 sm:p-6 md:p-8">
+
+        <!-- API Key Input Section -->
+        <div id="api-key-section" class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6 rounded-lg shadow-md">
+            <h4 class="font-bold">Action Required: Set Your Gemini API Key</h4>
+            <p class="mt-2">To use the AI features (✨), you need a free Google AI Gemini API key.</p>
+            <ol class="list-decimal list-inside mt-2 text-sm">
+                <li>Get your key from <a href="https://ai.google.dev/" target="_blank" class="underline font-medium">Google AI for Developers</a>.</li>
+                <li>Paste it below and click "Save Key".</li>
+            </ol>
+            <div class="mt-3 flex flex-col sm:flex-row gap-2">
+                <input type="password" id="api-key-input" placeholder="Paste your API key here" class="p-2 rounded-md border-yellow-400 focus:ring-yellow-500 focus:border-yellow-500 flex-grow">
+                <button id="save-key-btn" class="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors">Save Key</button>
+            </div>
+        </div>
+        <div id="api-key-success" class="hidden bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-lg shadow-md">
+            <p>✅ API Key saved successfully! The AI features are now enabled.</p>
+        </div>
+
+
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">
+                Exam Practice: AI-Powered Number Systems
+            </h1>
+            <p class="text-gray-600 mb-6 border-b-2 border-indigo-500 pb-4">Use the ✨ buttons to get AI-generated explanations or new practice questions!</p>
+
+            <div class="space-y-8" id="questions-container">
+
+                <!-- Question 1 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q1:</span> The roots of the quadratic equation <span class="font-mono text-gray-700">x<sup>2</sup> - (14)<sub>b</sub>x + (44)<sub>b</sub> = 0</span> are x=5 and x=8. Determine the base <span class="latex">b</span>.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>For a quadratic equation <span class="latex">ax<sup>2</sup> + bx + c = 0</span>, the sum of roots is <span class="latex">-b/a</span> and the product of roots is <span class="latex">c/a</span>.</p>
+                        <p>1. Sum of roots: 5 + 8 = 13. From the equation, the coefficient is <span class="font-mono">(14)<sub>b</sub></span>. So, <span class="font-mono">(14)<sub>b</sub> = b + 4</span>. Equating them: <span class="font-mono">b + 4 = 13</span> &rarr; <span class="font-bold">b = 9</span>.</p>
+                        <p>2. Product of roots: 5 &times; 8 = 40. From the equation, the constant is <span class="font-mono">(44)<sub>b</sub></span>. So, <span class="font-mono">(44)<sub>b</sub> = 4b + 4</span>.</p>
+                        <p>3. Verify with the product: <span class="font-mono">4(9) + 4 = 36 + 4 = 40</span>. The value matches. Thus, the base is 9.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q2:</span> Convert the hexadecimal number <span class="font-mono text-gray-700">(1B9.F8)<sub>16</sub></span> to its equivalent octal representation.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Convert each hex digit to a 4-bit binary string: <br> <span class="font-mono">1 &rarr; 0001</span>, <span class="font-mono">B &rarr; 1011</span>, <span class="font-mono">9 &rarr; 1001</span>, <span class="font-mono">F &rarr; 1111</span>, <span class="font-mono">8 &rarr; 1000</span>.</p>
+                        <p>2. Combine them: <span class="font-mono">(0001 1011 1001 . 1111 1000)<sub>2</sub></span>.</p>
+                        <p>3. Group the binary digits into sets of 3, starting from the radix point: <br> Integer part: <span class="font-mono">(000 110 111 001)<sub>2</sub></span>. Fractional part: <span class="font-mono">(111 110 00)<sub>2</sub></span>. Add trailing zeros to complete the last group: <span class="font-mono">(111 110 000)<sub>2</sub></span>.</p>
+                        <p>4. Convert each 3-bit group to its octal equivalent: <br> <span class="font-mono">000&rarr;0</span>, <span class="font-mono">110&rarr;6</span>, <span class="font-mono">111&rarr;7</span>, <span class="font-mono">001&rarr;1</span>. Fractional: <span class="font-mono">111&rarr;7</span>, <span class="font-mono">110&rarr;6</span>, <span class="font-mono">000&rarr;0</span>.</p>
+                        <p>The result is <span class="font-bold font-mono">(671.760)<sub>8</sub></span> or simply <span class="font-bold font-mono">(671.76)<sub>8</sub></span>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                 <!-- Question 3 -->
+                <div class="p-6 rounded-xl question-card">
+                     <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q3:</span> Given the multiplication <span class="font-mono text-gray-700">(14)<sub>x</sub> &times; (5)<sub>x</sub> = (74)<sub>x</sub></span>, determine the value of the base <span class="latex">x</span>.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Convert the equation to base 10: <span class="font-mono">(1*x<sup>1</sup> + 4*x<sup>0</sup>) &times; (5*x<sup>0</sup>) = (7*x<sup>1</sup> + 4*x<sup>0</sup>)</span>.</p>
+                        <p>2. Simplify the expression: <span class="font-mono">(x + 4) &times; 5 = 7x + 4</span>.</p>
+                        <p>3. Solve for x: <span class="font-mono">5x + 20 = 7x + 4</span> &rarr; <span class="font-mono">16 = 2x</span> &rarr; <span class="font-bold">x = 8</span>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+                
+                <!-- Question 4 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q4:</span> If <span class="font-mono text-gray-700">&radic;<span style="text-decoration: overline">(41)<sub>b</sub></span> = 5</span>, what is the value of the base <span class="latex">b</span>?</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. First, square both sides of the equation: <span class="font-mono">(41)<sub>b</sub> = 5<sup>2</sup> = 25</span>.</p>
+                        <p>2. Convert the base <span class="latex">b</span> number to base 10: <span class="font-mono">(41)<sub>b</sub> = 4*b + 1</span>.</p>
+                        <p>3. Set the two base 10 expressions equal and solve for b: <span class="font-mono">4b + 1 = 25</span> &rarr; <span class="font-mono">4b = 24</span> &rarr; <span class="font-bold">b = 6</span>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q5:</span> A positive integer N is represented as <span class="font-mono text-gray-700">(35)<sub>b</sub></span> in a base <span class="latex">b</span> system and as <span class="font-mono text-gray-700">(53)<sub>b-2</sub></span> in a base <span class="latex">b-2</span> system. Find the value of N in base 10.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Convert both representations of N to base 10: <br> <span class="font-mono">N = (35)<sub>b</sub> = 3*b + 5</span>. <br> <span class="font-mono">N = (53)<sub>b-2</sub> = 5*(b-2) + 3</span>.</p>
+                        <p>2. Since both expressions equal N, set them equal to each other: <span class="font-mono">3b + 5 = 5(b-2) + 3</span>.</p>
+                        <p>3. Solve for b: <span class="font-mono">3b + 5 = 5b - 10 + 3</span> &rarr; <span class="font-mono">3b + 5 = 5b - 7</span> &rarr; <span class="font-mono">12 = 2b</span> &rarr; <span class="font-bold">b = 6</span>.</p>
+                        <p>4. Now substitute the value of b back into either expression to find N: <br> <span class="font-mono">N = 3(6) + 5 = 18 + 5 = <span class="font-bold">23</span></span>. <br> Check with the other expression: <span class="font-mono">N = 5(6-2) + 3 = 5(4) + 3 = 20 + 3 = 23</span>. The value of N is 23.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q6:</span> In base <span class="latex">r</span>, the subtraction <span class="font-mono text-gray-700">(412)<sub>r</sub> - (133)<sub>r</sub></span> results in <span class="font-mono text-gray-700">(257)<sub>r</sub></span>. Determine the base <span class="latex">r</span>.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Analyze the rightmost column (the units place): <span class="font-mono">2 - 3</span> results in 7. This implies a borrow from the next column.</p>
+                        <p>2. The equation for this column is <span class="font-mono">(2 + r) - 3 = 7</span>.</p>
+                        <p>3. Solve for r: <span class="font-mono">r - 1 = 7</span> &rarr; <span class="font-bold">r = 8</span>.</p>
+                        <p>4. <strong>Verification:</strong> Check the other columns with base 8. <br> Middle column: Borrowed from 1, so it's 0. Borrow from 4, so it becomes <span class="font-mono">(0+8) - 3 = 5</span>. Correct. <br> Leftmost column: Borrowed from 4, so it's 3. <span class="font-mono">3 - 1 = 2</span>. Correct. The base is 8.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('questions-container');
+            const apiKeySection = document.getElementById('api-key-section');
+            const apiKeyInput = document.getElementById('api-key-input');
+            const saveKeyBtn = document.getElementById('save-key-btn');
+            const apiKeySuccess = document.getElementById('api-key-success');
+
+            // --- API Key Setup ---
+            function setupApiKey() {
+                const savedKey = localStorage.getItem('gemini-api-key');
+                if (savedKey) {
+                    apiKeySection.classList.add('hidden');
+                } else {
+                    apiKeySection.classList.remove('hidden');
+                }
+            }
+
+            saveKeyBtn.addEventListener('click', () => {
+                const key = apiKeyInput.value.trim();
+                if (key) {
+                    localStorage.setItem('gemini-api-key', key);
+                    apiKeySection.classList.add('hidden');
+                    apiKeySuccess.classList.remove('hidden');
+                    setTimeout(() => apiKeySuccess.classList.add('hidden'), 3000);
+                } else {
+                    alert('Please enter a valid API key.');
+                }
+            });
+            
+            setupApiKey(); // Run on page load
+
+            // --- Event Delegation for Buttons ---
+            container.addEventListener('click', async function(e) {
+                // --- Handle Show/Hide Answer ---
+                if (e.target.classList.contains('toggle-answer-btn')) {
+                    const button = e.target;
+                    const answerBlock = button.closest('.question-card').querySelector('.answer-block');
+                    const isHidden = answerBlock.classList.contains('hidden');
+
+                    if (isHidden) {
+                        answerBlock.classList.remove('hidden');
+                        button.textContent = 'Hide Answer';
+                        button.classList.remove('bg-indigo-500');
+                        button.classList.add('bg-gray-500');
+                    } else {
+                        answerBlock.classList.add('hidden');
+                        button.textContent = 'Show Answer';
+                        button.classList.remove('bg-gray-500');
+                        button.classList.add('bg-indigo-500');
+                    }
+                }
+
+                // --- Handle Gemini API Buttons ---
+                if (e.target.classList.contains('gemini-btn')) {
+                    const button = e.target;
+                    const action = button.dataset.action;
+                    const questionCard = button.closest('.question-card');
+                    const questionText = questionCard.querySelector('.question-text').innerText;
+                    const geminiContainer = questionCard.querySelector('.gemini-container');
+
+                    let prompt = '';
+                    if (action === 'explain') {
+                        prompt = `You are a helpful math tutor. Explain the core mathematical concept behind this question in a clear and concise way. Do not solve the specific question, but explain the general method. Question: "${questionText}"`;
+                    } else if (action === 'generate') {
+                        prompt = `You are a math exam creator. Based on the following question, create one new, similar practice question. The new question should test the same concept but use different numbers and have a different answer. Do not provide the solution to the new question. Original Question: "${questionText}"`;
+                    }
+
+                    if (prompt) {
+                        await callGemini(prompt, geminiContainer, button);
+                    }
+                }
+            });
+
+            /**
+             * Calls the Gemini API with a given prompt and displays the result.
+             * @param {string} prompt - The prompt to send to the Gemini API.
+             * @param {HTMLElement} container - The HTML element to display the result in.
+             * @param {HTMLElement} button - The button that was clicked, to disable it during the call.
+             */
+            async function callGemini(prompt, container, button) {
+                const apiKey = localStorage.getItem('gemini-api-key');
+                if (!apiKey) {
+                    container.innerHTML = `<div class="gemini-output text-red-600">Error: API Key not set. Please set your API key at the top of the page.</div>`;
+                    return;
+                }
+
+                // Show loader and disable button
+                container.innerHTML = '<div class="loader"></div>';
+                button.disabled = true;
+                
+                // FIX: Reverted model to a more compatible preview version to address 400 errors.
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                const payload = {
+                    contents: [{
+                        role: "user",
+                        parts: [{ text: prompt }]
+                    }]
+                };
+
+                let response;
+                let retries = 3;
+                let delay = 1000;
+
+                while (retries > 0) {
+                    try {
+                        response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (response.ok) {
+                            const result = await response.json();
+                            if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
+                                const text = result.candidates[0].content.parts[0].text;
+                                container.innerHTML = `<div class="gemini-output"><h4 class="font-bold text-lg mb-2">✨ AI-Generated Response:</h4><p>${text.replace(/\n/g, '<br>')}</p></div>`;
+                            } else {
+                                container.innerHTML = `<div class="gemini-output text-red-600">Error: Received an empty or invalid response from the AI.</div>`;
+                            }
+                            break; // Success, exit loop
+                        } else {
+                           throw new Error(`API Error: ${response.status}`);
+                        }
+
+                    } catch (error) {
+                        console.error("Error calling Gemini API:", error);
+                        retries--;
+                        if (retries === 0) {
+                             container.innerHTML = `<div class="gemini-output text-red-600">Error: Could not get a response from the AI after several attempts. Please try again later.</div>`;
+                        } else {
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            delay *= 2; // Exponential backoff
+                        }
+                    }
+                }
+                
+                // Re-enable button
+                button.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
