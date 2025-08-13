@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Powered Number System Exam Questions</title>
+    <title>Advanced Number Systems Practice</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -56,31 +56,30 @@
 
         <!-- API Key Input Section -->
         <div id="api-key-section" class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6 rounded-lg shadow-md">
-            <h4 class="font-bold">Action Required: Set Your Gemini API Key</h4>
-            <p class="mt-2">To use the AI features (✨), you need a free Google AI Gemini API key.</p>
+            <h4 class="font-bold">Action Required: Set Your Gemini API Key for this Session</h4>
+            <p class="mt-2">To use the AI features (✨), you need a free Google AI Gemini API key. You must enter it each time you open this file.</p>
             <ol class="list-decimal list-inside mt-2 text-sm">
                 <li>Get your key from <a href="https://ai.google.dev/" target="_blank" class="underline font-medium">Google AI for Developers</a>.</li>
-                <li>Paste it below and click "Save Key".</li>
+                <li>Paste it below and click "Set Key".</li>
             </ol>
             <div class="mt-3 flex flex-col sm:flex-row gap-2">
                 <input type="password" id="api-key-input" placeholder="Paste your API key here" class="p-2 rounded-md border-yellow-400 focus:ring-yellow-500 focus:border-yellow-500 flex-grow">
-                <button id="save-key-btn" class="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors">Save Key</button>
+                <button id="save-key-btn" class="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors">Set Key for Session</button>
             </div>
         </div>
         <div id="api-key-success" class="hidden bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-lg shadow-md">
-            <p>✅ API Key saved successfully! The AI features are now enabled.</p>
+            <p>✅ API Key accepted for this session! The AI features are now enabled.</p>
         </div>
 
 
         <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
             <h1 class="text-3xl font-bold text-gray-900 mb-2">
-                Exam Practice: AI-Powered Number Systems
+                Advanced Number Systems Practice
             </h1>
             <p class="text-gray-600 mb-6 border-b-2 border-indigo-500 pb-4">Use the ✨ buttons to get AI-generated explanations or new practice questions!</p>
 
             <div class="space-y-8" id="questions-container">
-
-                <!-- Question 1 -->
+                
                 <div class="p-6 rounded-xl question-card">
                     <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q1:</span> The roots of the quadratic equation <span class="font-mono text-gray-700">x<sup>2</sup> - (14)<sub>b</sub>x + (44)<sub>b</sub> = 0</span> are x=5 and x=8. Determine the base <span class="latex">b</span>.</p>
                     <div class="flex flex-wrap gap-2">
@@ -90,15 +89,13 @@
                     </div>
                     <div class="answer-block hidden">
                         <h4 class="font-bold text-lg mb-2">Solution:</h4>
-                        <p>For a quadratic equation <span class="latex">ax<sup>2</sup> + bx + c = 0</span>, the sum of roots is <span class="latex">-b/a</span> and the product of roots is <span class="latex">c/a</span>.</p>
-                        <p>1. Sum of roots: 5 + 8 = 13. From the equation, the coefficient is <span class="font-mono">(14)<sub>b</sub></span>. So, <span class="font-mono">(14)<sub>b</sub> = b + 4</span>. Equating them: <span class="font-mono">b + 4 = 13</span> &rarr; <span class="font-bold">b = 9</span>.</p>
-                        <p>2. Product of roots: 5 &times; 8 = 40. From the equation, the constant is <span class="font-mono">(44)<sub>b</sub></span>. So, <span class="font-mono">(44)<sub>b</sub> = 4b + 4</span>.</p>
+                        <p>1. Sum of roots: 5 + 8 = 13. From the equation, the coefficient is <span class="font-mono">(14)<sub>b</sub> = b + 4</span>. So, <span class="font-mono">b + 4 = 13</span> &rarr; <span class="font-bold">b = 9</span>.</p>
+                        <p>2. Product of roots: 5 &times; 8 = 40. From the equation, the constant is <span class="font-mono">(44)<sub>b</sub> = 4b + 4</span>.</p>
                         <p>3. Verify with the product: <span class="font-mono">4(9) + 4 = 36 + 4 = 40</span>. The value matches. Thus, the base is 9.</p>
                     </div>
                     <div class="gemini-container mt-4"></div>
                 </div>
 
-                <!-- Question 2 -->
                 <div class="p-6 rounded-xl question-card">
                     <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q2:</span> Convert the hexadecimal number <span class="font-mono text-gray-700">(1B9.F8)<sub>16</sub></span> to its equivalent octal representation.</p>
                     <div class="flex flex-wrap gap-2">
@@ -108,16 +105,14 @@
                     </div>
                     <div class="answer-block hidden">
                         <h4 class="font-bold text-lg mb-2">Solution:</h4>
-                        <p>1. Convert each hex digit to a 4-bit binary string: <br> <span class="font-mono">1 &rarr; 0001</span>, <span class="font-mono">B &rarr; 1011</span>, <span class="font-mono">9 &rarr; 1001</span>, <span class="font-mono">F &rarr; 1111</span>, <span class="font-mono">8 &rarr; 1000</span>.</p>
-                        <p>2. Combine them: <span class="font-mono">(0001 1011 1001 . 1111 1000)<sub>2</sub></span>.</p>
-                        <p>3. Group the binary digits into sets of 3, starting from the radix point: <br> Integer part: <span class="font-mono">(000 110 111 001)<sub>2</sub></span>. Fractional part: <span class="font-mono">(111 110 00)<sub>2</sub></span>. Add trailing zeros to complete the last group: <span class="font-mono">(111 110 000)<sub>2</sub></span>.</p>
-                        <p>4. Convert each 3-bit group to its octal equivalent: <br> <span class="font-mono">000&rarr;0</span>, <span class="font-mono">110&rarr;6</span>, <span class="font-mono">111&rarr;7</span>, <span class="font-mono">001&rarr;1</span>. Fractional: <span class="font-mono">111&rarr;7</span>, <span class="font-mono">110&rarr;6</span>, <span class="font-mono">000&rarr;0</span>.</p>
-                        <p>The result is <span class="font-bold font-mono">(671.760)<sub>8</sub></span> or simply <span class="font-bold font-mono">(671.76)<sub>8</sub></span>.</p>
+                        <p>1. Convert each hex digit to a 4-bit binary string: <span class="font-mono">1&rarr;0001, B&rarr;1011, 9&rarr;1001, F&rarr;1111, 8&rarr;1000</span>.</p>
+                        <p>2. Combine: <span class="font-mono">(0001 1011 1001 . 1111 1000)<sub>2</sub></span>.</p>
+                        <p>3. Group into 3-bit sets from the radix point: <span class="font-mono">(000 110 111 001 . 111 110 000)<sub>2</sub></span>.</p>
+                        <p>4. Convert each 3-bit group to octal: <span class="font-bold font-mono">(671.76)<sub>8</sub></span>.</p>
                     </div>
                     <div class="gemini-container mt-4"></div>
                 </div>
 
-                 <!-- Question 3 -->
                 <div class="p-6 rounded-xl question-card">
                      <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q3:</span> Given the multiplication <span class="font-mono text-gray-700">(14)<sub>x</sub> &times; (5)<sub>x</sub> = (74)<sub>x</sub></span>, determine the value of the base <span class="latex">x</span>.</p>
                     <div class="flex flex-wrap gap-2">
@@ -127,14 +122,12 @@
                     </div>
                     <div class="answer-block hidden">
                         <h4 class="font-bold text-lg mb-2">Solution:</h4>
-                        <p>1. Convert the equation to base 10: <span class="font-mono">(1*x<sup>1</sup> + 4*x<sup>0</sup>) &times; (5*x<sup>0</sup>) = (7*x<sup>1</sup> + 4*x<sup>0</sup>)</span>.</p>
-                        <p>2. Simplify the expression: <span class="font-mono">(x + 4) &times; 5 = 7x + 4</span>.</p>
-                        <p>3. Solve for x: <span class="font-mono">5x + 20 = 7x + 4</span> &rarr; <span class="font-mono">16 = 2x</span> &rarr; <span class="font-bold">x = 8</span>.</p>
+                        <p>1. Convert to base 10: <span class="font-mono">(x + 4) &times; 5 = 7x + 4</span>.</p>
+                        <p>2. Solve for x: <span class="font-mono">5x + 20 = 7x + 4</span> &rarr; <span class="font-mono">16 = 2x</span> &rarr; <span class="font-bold">x = 8</span>.</p>
                     </div>
                     <div class="gemini-container mt-4"></div>
                 </div>
-                
-                <!-- Question 4 -->
+
                 <div class="p-6 rounded-xl question-card">
                     <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q4:</span> If <span class="font-mono text-gray-700">&radic;<span style="text-decoration: overline">(41)<sub>b</sub></span> = 5</span>, what is the value of the base <span class="latex">b</span>?</p>
                     <div class="flex flex-wrap gap-2">
@@ -144,16 +137,15 @@
                     </div>
                     <div class="answer-block hidden">
                         <h4 class="font-bold text-lg mb-2">Solution:</h4>
-                        <p>1. First, square both sides of the equation: <span class="font-mono">(41)<sub>b</sub> = 5<sup>2</sup> = 25</span>.</p>
-                        <p>2. Convert the base <span class="latex">b</span> number to base 10: <span class="font-mono">(41)<sub>b</sub> = 4*b + 1</span>.</p>
-                        <p>3. Set the two base 10 expressions equal and solve for b: <span class="font-mono">4b + 1 = 25</span> &rarr; <span class="font-mono">4b = 24</span> &rarr; <span class="font-bold">b = 6</span>.</p>
+                        <p>1. Square both sides: <span class="font-mono">(41)<sub>b</sub> = 5<sup>2</sup> = 25</span>.</p>
+                        <p>2. Convert to base 10: <span class="font-mono">4b + 1 = 25</span>.</p>
+                        <p>3. Solve for b: <span class="font-mono">4b = 24</span> &rarr; <span class="font-bold">b = 6</span>.</p>
                     </div>
                     <div class="gemini-container mt-4"></div>
                 </div>
 
-                <!-- Question 5 -->
                 <div class="p-6 rounded-xl question-card">
-                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q5:</span> A positive integer N is represented as <span class="font-mono text-gray-700">(35)<sub>b</sub></span> in a base <span class="latex">b</span> system and as <span class="font-mono text-gray-700">(53)<sub>b-2</sub></span> in a base <span class="latex">b-2</span> system. Find the value of N in base 10.</p>
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q5:</span> In base <span class="latex">r</span>, the subtraction <span class="font-mono text-gray-700">(412)<sub>r</sub> - (133)<sub>r</sub></span> results in <span class="font-mono text-gray-700">(257)<sub>r</sub></span>. Determine the base <span class="latex">r</span>.</p>
                     <div class="flex flex-wrap gap-2">
                         <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
                         <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
@@ -161,28 +153,137 @@
                     </div>
                     <div class="answer-block hidden">
                         <h4 class="font-bold text-lg mb-2">Solution:</h4>
-                        <p>1. Convert both representations of N to base 10: <br> <span class="font-mono">N = (35)<sub>b</sub> = 3*b + 5</span>. <br> <span class="font-mono">N = (53)<sub>b-2</sub> = 5*(b-2) + 3</span>.</p>
-                        <p>2. Since both expressions equal N, set them equal to each other: <span class="font-mono">3b + 5 = 5(b-2) + 3</span>.</p>
-                        <p>3. Solve for b: <span class="font-mono">3b + 5 = 5b - 10 + 3</span> &rarr; <span class="font-mono">3b + 5 = 5b - 7</span> &rarr; <span class="font-mono">12 = 2b</span> &rarr; <span class="font-bold">b = 6</span>.</p>
-                        <p>4. Now substitute the value of b back into either expression to find N: <br> <span class="font-mono">N = 3(6) + 5 = 18 + 5 = <span class="font-bold">23</span></span>. <br> Check with the other expression: <span class="font-mono">N = 5(6-2) + 3 = 5(4) + 3 = 20 + 3 = 23</span>. The value of N is 23.</p>
-                    </div>
-                    <div class="gemini-container mt-4"></div>
-                </div>
-
-                <!-- Question 6 -->
-                <div class="p-6 rounded-xl question-card">
-                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q6:</span> In base <span class="latex">r</span>, the subtraction <span class="font-mono text-gray-700">(412)<sub>r</sub> - (133)<sub>r</sub></span> results in <span class="font-mono text-gray-700">(257)<sub>r</sub></span>. Determine the base <span class="latex">r</span>.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
-                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
-                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
-                    </div>
-                    <div class="answer-block hidden">
-                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
-                        <p>1. Analyze the rightmost column (the units place): <span class="font-mono">2 - 3</span> results in 7. This implies a borrow from the next column.</p>
+                        <p>1. Analyze the rightmost column: <span class="font-mono">2 - 3</span> results in 7. This implies a borrow.</p>
                         <p>2. The equation for this column is <span class="font-mono">(2 + r) - 3 = 7</span>.</p>
                         <p>3. Solve for r: <span class="font-mono">r - 1 = 7</span> &rarr; <span class="font-bold">r = 8</span>.</p>
-                        <p>4. <strong>Verification:</strong> Check the other columns with base 8. <br> Middle column: Borrowed from 1, so it's 0. Borrow from 4, so it becomes <span class="font-mono">(0+8) - 3 = 5</span>. Correct. <br> Leftmost column: Borrowed from 4, so it's 3. <span class="font-mono">3 - 1 = 2</span>. Correct. The base is 8.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+                
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q6:</span> Convert the decimal number (250.5)₁₀ to base 2, base 8, and base 16.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. <strong>Base 2:</strong> Integer part (250): 11111010. Fractional part (0.5): .1. Result: <span class="font-bold font-mono">11111010.1<sub>2</sub></span>.</p>
+                        <p>2. <strong>Base 8:</strong> Group binary by 3s: (011 111 010 . 100) &rarr; <span class="font-bold font-mono">372.4<sub>8</sub></span>.</p>
+                        <p>3. <strong>Base 16:</strong> Group binary by 4s: (1111 1010 . 1000) &rarr; <span class="font-bold font-mono">FA.8<sub>16</sub></span>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q7:</span> Find the value of x if (211)ₓ = (152)₈.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Convert both sides to base 10: <br> (211)ₓ = 2x² + x + 1. <br> (152)₈ = 1*8² + 5*8¹ + 2*8⁰ = 64 + 40 + 2 = 106.</p>
+                        <p>2. Set them equal: 2x² + x + 1 = 106 &rarr; 2x² + x - 105 = 0.</p>
+                        <p>3. Solve the quadratic equation. Factoring gives (2x + 15)(x - 7) = 0. </p>
+                        <p>4. The possible solutions are x = -15/2 and x = 7. Since a base must be a positive integer, <span class="font-bold">x = 7</span>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q8:</span> Perform the arithmetic operation (475)₈ + (256)₈.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Rightmost column: 5 + 6 = 11. In base 8, 11 is 1*8 + 3. Write down 3, carry 1.</p>
+                        <p>2. Middle column: 7 + 5 + 1(carry) = 13. In base 8, 13 is 1*8 + 5. Write down 5, carry 1.</p>
+                        <p>3. Leftmost column: 4 + 2 + 1(carry) = 7. Write down 7.</p>
+                        <p>The result is <span class="font-bold font-mono">(753)₈</span>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q9:</span> What is the 10's complement of the decimal number 18?</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>The formula for the 10's complement of an n-digit number N is 10ⁿ - N.</p>
+                        <p>For the number 18 (which has 2 digits, so n=2), the 10's complement is 10² - 18 = 100 - 18 = <span class="font-bold">82</span>.</p>
+                        <p>Alternatively, find the 9's complement (99 - 18 = 81) and add 1 (81 + 1 = 82).</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+                
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q10:</span> Determine the value of base <span class="latex">x</span> if (193)ₓ = (623)₈.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Convert both sides to base 10. Note that for (193)ₓ to be a valid number, the base x must be greater than the largest digit, so x > 9.</p>
+                        <p>(193)ₓ = 1*x² + 9*x¹ + 3*x⁰ = x² + 9x + 3.</p>
+                        <p>(623)₈ = 6*8² + 2*8¹ + 3*8⁰ = 6*64 + 16 + 3 = 384 + 16 + 3 = 403.</p>
+                        <p>2. Set them equal: x² + 9x + 3 = 403 &rarr; x² + 9x - 400 = 0.</p>
+                        <p>3. Solve the quadratic equation: (x + 25)(x - 16) = 0.</p>
+                        <p>4. The solutions are x = -25 and x = 16. Since the base must be positive, <span class="font-bold">x = 16</span>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q11:</span> Convert (525)₁₀ to base 5.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>Use successive division by the target base (5).</p>
+                        <p>525 / 5 = 105 remainder 0</p>
+                        <p>105 / 5 = 21 remainder 0</p>
+                        <p>21 / 5 = 4 remainder 1</p>
+                        <p>4 / 5 = 0 remainder 4</p>
+                        <p>Reading the remainders from bottom to top gives <span class="font-bold font-mono">(4100)₅</span>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q12:</span> Perform the subtraction (1101)₂ - (1011)₂ using 2's complement.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Find the 2's complement of the subtrahend (1011). First, find the 1's complement by inverting the bits: 0100.</p>
+                        <p>2. Add 1 to the 1's complement: 0100 + 1 = 0101. This is the 2's complement.</p>
+                        <p>3. Add the first number to the 2's complement:
+                        <pre class="font-mono bg-gray-200 p-2 rounded">
+  1101
++ 0101
+-------
+ 10010
+</pre>
+                        <p>4. Since there is a carry out (the leading 1), we discard it. The result is positive.</p>
+                        <p>The final answer is <span class="font-bold font-mono">(0010)₂</span> or simply 10₂. (Check: 13 - 11 = 2).</p>
                     </div>
                     <div class="gemini-container mt-4"></div>
                 </div>
@@ -193,6 +294,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            let sessionApiKey = null; // Use a temporary variable instead of localStorage
+
             const container = document.getElementById('questions-container');
             const apiKeySection = document.getElementById('api-key-section');
             const apiKeyInput = document.getElementById('api-key-input');
@@ -200,28 +303,17 @@
             const apiKeySuccess = document.getElementById('api-key-success');
 
             // --- API Key Setup ---
-            function setupApiKey() {
-                const savedKey = localStorage.getItem('gemini-api-key');
-                if (savedKey) {
-                    apiKeySection.classList.add('hidden');
-                } else {
-                    apiKeySection.classList.remove('hidden');
-                }
-            }
-
             saveKeyBtn.addEventListener('click', () => {
                 const key = apiKeyInput.value.trim();
                 if (key) {
-                    localStorage.setItem('gemini-api-key', key);
+                    sessionApiKey = key; // Save key to the temporary variable
                     apiKeySection.classList.add('hidden');
                     apiKeySuccess.classList.remove('hidden');
-                    setTimeout(() => apiKeySuccess.classList.add('hidden'), 3000);
+                    setTimeout(() => apiKeySuccess.classList.add('hidden'), 4000);
                 } else {
                     alert('Please enter a valid API key.');
                 }
             });
-            
-            setupApiKey(); // Run on page load
 
             // --- Event Delegation for Buttons ---
             container.addEventListener('click', async function(e) {
@@ -272,9 +364,8 @@
              * @param {HTMLElement} button - The button that was clicked, to disable it during the call.
              */
             async function callGemini(prompt, container, button) {
-                const apiKey = localStorage.getItem('gemini-api-key');
-                if (!apiKey) {
-                    container.innerHTML = `<div class="gemini-output text-red-600">Error: API Key not set. Please set your API key at the top of the page.</div>`;
+                if (!sessionApiKey) {
+                    container.innerHTML = `<div class="gemini-output text-red-600">Error: API Key not set for this session. Please set your API key at the top of the page.</div>`;
                     return;
                 }
 
@@ -282,8 +373,7 @@
                 container.innerHTML = '<div class="loader"></div>';
                 button.disabled = true;
                 
-                // FIX: Reverted model to a more compatible preview version to address 400 errors.
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${sessionApiKey}`;
 
                 const payload = {
                     contents: [{
