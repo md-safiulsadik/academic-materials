@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered BCD Practice Questions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .latex {
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+        }
+        .question-card {
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .answer-block {
+            background-color: #f8fafc;
+            border-left: 4px solid #4f46e5;
+            margin-top: 1rem;
+            padding: 1rem;
+        }
+        .gemini-output {
+            background-color: #eef2ff;
+            border-left: 4px solid #818cf8;
+            margin-top: 1rem;
+            padding: 1rem;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4f46e5;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-top: 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="container mx-auto p-4 sm:p-6 md:p-8">
+
+        <!-- API Key Input Section -->
+        <div id="api-key-section" class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6 rounded-lg shadow-md">
+            <h4 class="font-bold">Action Required: Set Your Gemini API Key for this Session</h4>
+            <p class="mt-2">To use the AI features (✨), you need a free Google AI Gemini API key. You must enter it each time you open this file.</p>
+            <ol class="list-decimal list-inside mt-2 text-sm">
+                <li>Get your key from <a href="https://ai.google.dev/" target="_blank" class="underline font-medium">Google AI for Developers</a>.</li>
+                <li>Paste it below and click "Set Key".</li>
+            </ol>
+            <div class="mt-3 flex flex-col sm:flex-row gap-2">
+                <input type="password" id="api-key-input" placeholder="Paste your API key here" class="p-2 rounded-md border-yellow-400 focus:ring-yellow-500 focus:border-yellow-500 flex-grow">
+                <button id="save-key-btn" class="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors">Set Key for Session</button>
+            </div>
+        </div>
+        <div id="api-key-success" class="hidden bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-lg shadow-md">
+            <p>✅ API Key accepted for this session! The AI features are now enabled.</p>
+        </div>
+
+
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">
+                Exam Practice: BCD Arithmetic
+            </h1>
+            <p class="text-gray-600 mb-6 border-b-2 border-indigo-500 pb-4">Use the ✨ buttons to get AI-generated explanations or new practice questions!</p>
+
+            <div class="space-y-8" id="questions-container">
+
+                <!-- Question 1 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q1:</span> Perform BCD addition for the decimal numbers <span class="font-mono text-gray-700">(34)<sub>10</sub></span> and <span class="font-mono text-gray-700">(52)<sub>10</sub></span>.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Convert to BCD: <br> 34 &rarr; <span class="font-mono">0011 0100</span> <br> 52 &rarr; <span class="font-mono">0101 0010</span></p>
+                        <p>2. Add the BCD numbers:
+                        <pre class="font-mono bg-gray-200 p-2 rounded">
+  0011 0100
++ 0101 0010
+-----------
+  1000 0110
+</pre>
+                        <p>3. Check each 4-bit group. The left group is <span class="font-mono">1000</span> (8) and the right group is <span class="font-mono">0110</span> (6). Both are valid (<=9). No correction is needed.</p>
+                        <p>Final BCD result: <span class="font-bold font-mono">1000 0110</span>, which is (86)<sub>10</sub>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q2:</span> Perform BCD addition for the decimal numbers <span class="font-mono text-gray-700">(98)<sub>10</sub></span> and <span class="font-mono text-gray-700">(79)<sub>10</sub></span>.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Convert to BCD: <br> 98 &rarr; <span class="font-mono">1001 1000</span> <br> 79 &rarr; <span class="font-mono">0111 1001</span></p>
+                        <p>2. Add the BCD numbers:
+                        <pre class="font-mono bg-gray-200 p-2 rounded">
+    1 (carry)
+  1001 1000
++ 0111 1001
+-----------
+ 1 0001 0001
+</pre>
+                        <p>3. Correct the result. The right group sum is <span class="font-mono">1000 + 1001 = 10001</span>. The 4-bit result is <span class="font-mono">0001</span> with a carry. Since the sum is > 9, we add 6: <span class="font-mono">0001 + 0110 = 0111</span> (7).</p>
+                        <p>4. Add the left group with the carry: <span class="font-mono">1 + 1001 + 0111 = 10001</span>. The 4-bit result is <span class="font-mono">0001</span> with a carry. Since the sum is > 9, we add 6: <span class="font-mono">0001 + 0110 = 0111</span> (7).</p>
+                        <p>5. The carry out from the left group forms a new BCD group: <span class="font-mono">0001</span> (1).</p>
+                        <p>Final BCD result: <span class="font-bold font-mono">0001 0111 0111</span>, which is (177)<sub>10</sub>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q3:</span> Represent the numbers <span class="font-mono text-gray-700">(690)<sub>10</sub></span> and <span class="font-mono text-gray-700">(1000)<sub>8</sub></span> in BCD, and then show the steps necessary to form their sum in BCD.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Convert (1000)<sub>8</sub> to decimal: 1 * 8<sup>3</sup> = 512<sub>10</sub>.</p>
+                        <p>2. The two decimal numbers are 690 and 512.</p>
+                        <p>3. Convert both to BCD:<br>
+                        690 &rarr; <span class="font-mono">0110 1001 0000</span><br>
+                        512 &rarr; <span class="font-mono">0101 0001 0010</span></p>
+                        <p>4. Perform BCD addition:
+                        <pre class="font-mono bg-gray-200 p-2 rounded">
+  0110 1001 0000
++ 0101 0001 0010
+-----------------
+  1011 1010 0010
+</pre>
+                        <p>5. Correct the invalid groups (>9):<br>
+                        Right group (0010) is valid (2).<br>
+                        Middle group (1010) is invalid. Add 6: <span class="font-mono">1010 + 0110 = 1 0000</span>. Result is 0, carry 1.<br>
+                        Left group (1011). Add carry: <span class="font-mono">1011 + 1 = 1100</span>. Invalid. Add 6: <span class="font-mono">1100 + 0110 = 1 0010</span>. Result is 2, carry 1.</p>
+                        <p>6. Assemble the final result with the new carry: <span class="font-bold font-mono">0001 0010 0000 0010</span>, which is (1202)<sub>10</sub>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q4:</span> Perform BCD addition between the two numbers <span class="font-mono text-gray-700">(23D)<sub>16</sub></span> and <span class="font-mono text-gray-700">(F67)<sub>16</sub></span> using their BCD representations.</p>
+                     <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Convert hex to decimal:<br>
+                        (23D)<sub>16</sub> = 573<sub>10</sub>.<br>
+                        (F67)<sub>16</sub> = 3943<sub>10</sub>.</p>
+                        <p>2. Convert decimal to BCD:<br>
+                        573 &rarr; <span class="font-mono">0000 0101 0111 0011</span> (Padded)<br>
+                        3943 &rarr; <span class="font-mono">0011 1001 0100 0011</span></p>
+                        <p>3. Perform BCD addition:
+                        <pre class="font-mono bg-gray-200 p-2 rounded">
+  0000 0101 0111 0011
++ 0011 1001 0100 0011
+-----------------------
+  0011 1110 1011 0110
+</pre>
+                        <p>4. Correct invalid groups:<br>
+                        - Right group (0110) is 6. Valid.<br>
+                        - 2nd group (1011) is 11 (>9). Invalid. Add 6: <span class="font-mono">1011 + 0110 = 1 0001</span>. Result is 1, carry 1.<br>
+                        - 3rd group (1110) is 14. Add carry: <span class="font-mono">1110 + 1 = 1111</span>. Invalid. Add 6: <span class="font-mono">1111 + 0110 = 1 0101</span>. Result is 5, carry 1.<br>
+                        - Left group (0011). Add carry: <span class="font-mono">0011 + 1 = 0100</span>. Result is 4. Valid.</p>
+                        <p>5. Assemble the corrected groups: <span class="font-bold font-mono">0100 0101 0001 0110</span>, which is (4516)<sub>10</sub>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+                
+                <!-- Question 5 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q5:</span> What is the largest 3-digit decimal number that can be represented in BCD? Convert its BCD form to binary and hexadecimal.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. The largest 3-digit decimal number is 999.</p>
+                        <p>2. Its BCD representation is <span class="font-bold font-mono">1001 1001 1001</span>.</p>
+                        <p>3. To convert this BCD form to binary, we treat the 12 bits as a single binary number: <span class="font-bold font-mono">100110011001<sub>2</sub></span>.</p>
+                        <p>4. To convert this same BCD bit pattern to hexadecimal, we group the bits into sets of 4 (which they already are): <span class="font-mono">1001 1001 1001</span>. This gives <span class="font-bold font-mono">999</span><sub>16</sub>. 
+                        <br><i>(Note: This is different from converting the decimal value 999 to hex, which would be 3E7<sub>16</sub>).</i></p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q6:</span> Perform BCD addition on <span class="font-mono text-gray-700">(11101100)<sub>2</sub></span> and <span class="font-mono text-gray-700">(10100100)<sub>2</sub></span> after converting them to BCD.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Convert binary to decimal:<br>
+                        (11101100)<sub>2</sub> = 236<sub>10</sub>.<br>
+                        (10100100)<sub>2</sub> = 164<sub>10</sub>.</p>
+                        <p>2. Convert decimal to BCD:<br>
+                        236 &rarr; <span class="font-mono">0010 0011 0110</span><br>
+                        164 &rarr; <span class="font-mono">0001 0110 0100</span></p>
+                        <p>3. Add the BCD numbers:<br>
+                        <pre class="font-mono bg-gray-200 p-2 rounded">
+  0010 0011 0110
++ 0001 0110 0100
+-----------------
+  0011 1001 1010
+</pre>
+                        <p>4. Correct the invalid group:<br>
+                        Right group (1010) is invalid. Add 6: <span class="font-mono">1010 + 0110 = 1 0000</span>. Result 0, carry 1.<br>
+                        Middle group (1001). Add carry: <span class="font-mono">1001 + 1 = 1010</span>. Invalid. Add 6: <span class="font-mono">1010 + 0110 = 1 0000</span>. Result 0, carry 1.<br>
+                        Left group (0011). Add carry: <span class="font-mono">0011 + 1 = 0100</span>. Valid.</p>
+                        <p>5. Assemble the result: <span class="font-bold font-mono">0100 0000 0000</span>, which is (400)<sub>10</sub>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+                
+                <!-- Question 7 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q7:</span> Perform BCD addition for (18)₁₀ and (29)₁₀.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Convert to BCD: <br> 18 &rarr; <span class="font-mono">0001 1000</span> <br> 29 &rarr; <span class="font-mono">0010 1001</span></p>
+                        <p>2. Add the BCD numbers:
+                        <pre class="font-mono bg-gray-200 p-2 rounded">
+  0001 1000
++ 0010 1001
+-----------
+  0011 0001  (carry from right group)
+</pre>
+                        <p>3. Right group: <span class="font-mono">1000 + 1001 = 10001</span>. The sum is > 9. Result is <span class="font-mono">0001</span> with a carry. Correct by adding 6: <span class="font-mono">0001 + 0110 = 0111</span> (7).</p>
+                        <p>4. Left group: <span class="font-mono">0001 + 0010 + 1 (carry) = 0100</span> (4). This is valid.</p>
+                        <p>Final BCD result: <span class="font-bold font-mono">0100 0111</span>, which is (47)<sub>10</sub>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q8:</span> Which of the following 4-bit groups are invalid in the BCD system: <span class="font-mono">1010</span>, <span class="font-mono">0111</span>, <span class="font-mono">1100</span>, <span class="font-mono">1001</span>? Explain why.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>The invalid BCD groups are <span class="font-bold font-mono">1010</span> and <span class="font-bold font-mono">1100</span>.</p>
+                        <p><strong>Reason:</strong> BCD represents decimal digits 0 through 9. A 4-bit group can represent values from 0 to 15. The binary values for 10 through 15 do not correspond to any single decimal digit, so they are considered invalid in the BCD system.
+                        <br>- <span class="font-mono">1010</span> = 10 (Invalid)
+                        <br>- <span class="font-mono">0111</span> = 7 (Valid)
+                        <br>- <span class="font-mono">1100</span> = 12 (Invalid)
+                        <br>- <span class="font-mono">1001</span> = 9 (Valid)
+                        </p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q9:</span> Convert the octal number (77)₈ to its decimal equivalent, and then represent the result in BCD.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Convert octal to decimal: (77)₈ = 7 * 8¹ + 7 * 8⁰ = 56 + 7 = 63₁₀.</p>
+                        <p>2. Convert the decimal result (63) to BCD.</p>
+                        <p>3. BCD of 6 is <span class="font-mono">0110</span>. BCD of 3 is <span class="font-mono">0011</span>.</p>
+                        <p>Final BCD result: <span class="font-bold font-mono">0110 0011</span>.</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q10:</span> Perform BCD subtraction of (48)₁₀ from (91)₁₀ using 9's complement BCD arithmetic.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Find the 9's complement of the subtrahend (48). The 9's complement of 48 is 99 - 48 = 51.</p>
+                        <p>2. Perform BCD addition of the minuend (91) and the 9's complement (51).</p>
+                        <p>3. Convert to BCD: <br>91 &rarr; <span class="font-mono">1001 0001</span> <br>51 &rarr; <span class="font-mono">0101 0001</span></p>
+                        <p>4. Add them:
+                        <pre class="font-mono bg-gray-200 p-2 rounded">
+  1001 0001
++ 0101 0001
+-----------
+  1110 0010
+</pre>
+                        <p>5. Correct the left group (1110) as it's > 9. Add 6: <span class="font-mono">1110 + 0110 = 1 0100</span>. Result is 4, carry 1 (end-around carry).</p>
+                        <p>6. The intermediate result is <span class="font-mono">0100 0010</span> with an end-around carry of 1.</p>
+                        <p>7. Add the end-around carry to the result: <span class="font-mono">0100 0010 + 1 = 0100 0011</span>.</p>
+                        <p>Final BCD result: <span class="font-bold font-mono">0100 0011</span>, which is (43)<sub>10</sub>. (Check: 91 - 48 = 43).</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+                
+                <!-- Question 11 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q11:</span> Add the BCD numbers <span class="font-mono text-gray-700">0110 0111</span> and <span class="font-mono text-gray-700">0101 0011</span>.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. Add the BCD numbers directly:
+                        <pre class="font-mono bg-gray-200 p-2 rounded">
+  0110 0111
++ 0101 0011
+-----------
+  1011 1010
+</pre>
+                        <p>2. Both groups are invalid (>9). Correct the right group: <span class="font-mono">1010 + 0110 = 1 0000</span>. Result is 0, carry 1.</p>
+                        <p>3. Correct the left group, adding the carry: <span class="font-mono">1011 + 1 = 1100</span>. Invalid. Add 6: <span class="font-mono">1100 + 0110 = 1 0010</span>. Result is 2, carry 1.</p>
+                        <p>4. Assemble the result with the new carry: <span class="font-bold font-mono">0001 0010 0000</span>, which is (120)<sub>10</sub>. (Check: 67 + 53 = 120).</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="p-6 rounded-xl question-card">
+                    <p class="font-semibold text-lg mb-4 question-text"><span class="font-bold text-indigo-600">Q12:</span> Perform BCD subtraction of (38)₁₀ from (75)₁₀ using 9's complement.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="toggle-answer-btn bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors">Show Answer</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="explain">✨ Explain Concept</button>
+                        <button class="gemini-btn bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors" data-action="generate">✨ Generate Similar Question</button>
+                    </div>
+                    <div class="answer-block hidden">
+                        <h4 class="font-bold text-lg mb-2">Solution:</h4>
+                        <p>1. 9's complement of 38 is 99 - 38 = 61.</p>
+                        <p>2. Add 75 and 61 in BCD: <br>75 &rarr; <span class="font-mono">0111 0101</span> <br>61 &rarr; <span class="font-mono">0110 0001</span></p>
+                        <pre class="font-mono bg-gray-200 p-2 rounded">
+  0111 0101
++ 0110 0001
+-----------
+  1101 0110
+</pre>
+                        <p>3. Correct the left group (1101): <span class="font-mono">1101 + 0110 = 1 0011</span>. Result is 3, carry 1.</p>
+                        <p>4. Intermediate result is <span class="font-mono">0011 0110</span> with end-around carry.</p>
+                        <p>5. Add end-around carry: <span class="font-mono">0011 0110 + 1 = 0011 0111</span>.</p>
+                        <p>Final BCD result: <span class="font-bold font-mono">0011 0111</span>, which is (37)<sub>10</sub>. (Check: 75 - 38 = 37).</p>
+                    </div>
+                    <div class="gemini-container mt-4"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let sessionApiKey = null; // Use a temporary variable
+
+            const container = document.getElementById('questions-container');
+            const apiKeySection = document.getElementById('api-key-section');
+            const apiKeyInput = document.getElementById('api-key-input');
+            const saveKeyBtn = document.getElementById('save-key-btn');
+            const apiKeySuccess = document.getElementById('api-key-success');
+
+            // --- API Key Setup ---
+            saveKeyBtn.addEventListener('click', () => {
+                const key = apiKeyInput.value.trim();
+                if (key) {
+                    sessionApiKey = key; // Save key to the temporary variable
+                    apiKeySection.classList.add('hidden');
+                    apiKeySuccess.classList.remove('hidden');
+                    setTimeout(() => apiKeySuccess.classList.add('hidden'), 3000);
+                } else {
+                    alert('Please enter a valid API key.');
+                }
+            });
+
+            // --- Event Delegation for Buttons ---
+            container.addEventListener('click', async function(e) {
+                // --- Handle Show/Hide Answer ---
+                if (e.target.classList.contains('toggle-answer-btn')) {
+                    const button = e.target;
+                    const answerBlock = button.closest('.question-card').querySelector('.answer-block');
+                    const isHidden = answerBlock.classList.contains('hidden');
+
+                    if (isHidden) {
+                        answerBlock.classList.remove('hidden');
+                        button.textContent = 'Hide Answer';
+                        button.classList.remove('bg-indigo-500');
+                        button.classList.add('bg-gray-500');
+                    } else {
+                        answerBlock.classList.add('hidden');
+                        button.textContent = 'Show Answer';
+                        button.classList.remove('bg-gray-500');
+                        button.classList.add('bg-indigo-500');
+                    }
+                }
+
+                // --- Handle Gemini API Buttons ---
+                if (e.target.classList.contains('gemini-btn')) {
+                    const button = e.target;
+                    const action = button.dataset.action;
+                    const questionCard = button.closest('.question-card');
+                    const questionText = questionCard.querySelector('.question-text').innerText;
+                    const geminiContainer = questionCard.querySelector('.gemini-container');
+
+                    let prompt = '';
+                    if (action === 'explain') {
+                        prompt = `You are a helpful math tutor. Explain the core mathematical concept behind this question in a clear and concise way. Do not solve the specific question, but explain the general method. Question: "${questionText}"`;
+                    } else if (action === 'generate') {
+                        prompt = `You are a math exam creator. Based on the following question, create one new, similar practice question. The new question should test the same concept but use different numbers and have a different answer. Do not provide the solution to the new question. Original Question: "${questionText}"`;
+                    }
+
+                    if (prompt) {
+                        await callGemini(prompt, geminiContainer, button);
+                    }
+                }
+            });
+
+            /**
+             * Calls the Gemini API with a given prompt and displays the result.
+             * @param {string} prompt - The prompt to send to the Gemini API.
+             * @param {HTMLElement} container - The HTML element to display the result in.
+             * @param {HTMLElement} button - The button that was clicked, to disable it during the call.
+             */
+            async function callGemini(prompt, container, button) {
+                if (!sessionApiKey) {
+                    container.innerHTML = `<div class="gemini-output text-red-600">Error: API Key not set for this session. Please set your API key at the top of the page.</div>`;
+                    return;
+                }
+
+                // Show loader and disable button
+                container.innerHTML = '<div class="loader"></div>';
+                button.disabled = true;
+                
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${sessionApiKey}`;
+
+                const payload = {
+                    contents: [{
+                        role: "user",
+                        parts: [{ text: prompt }]
+                    }]
+                };
+
+                let response;
+                let retries = 3;
+                let delay = 1000;
+
+                while (retries > 0) {
+                    try {
+                        response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (response.ok) {
+                            const result = await response.json();
+                            if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
+                                const text = result.candidates[0].content.parts[0].text;
+                                container.innerHTML = `<div class="gemini-output"><h4 class="font-bold text-lg mb-2">✨ AI-Generated Response:</h4><p>${text.replace(/\n/g, '<br>')}</p></div>`;
+                            } else {
+                                container.innerHTML = `<div class="gemini-output text-red-600">Error: Received an empty or invalid response from the AI.</div>`;
+                            }
+                            break; // Success, exit loop
+                        } else {
+                           throw new Error(`API Error: ${response.status}`);
+                        }
+
+                    } catch (error) {
+                        console.error("Error calling Gemini API:", error);
+                        retries--;
+                        if (retries === 0) {
+                             container.innerHTML = `<div class="gemini-output text-red-600">Error: Could not get a response from the AI after several attempts. Please try again later.</div>`;
+                        } else {
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            delay *= 2; // Exponential backoff
+                        }
+                    }
+                }
+                
+                // Re-enable button
+                button.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
