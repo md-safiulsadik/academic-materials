@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Two‑Bit Adder — Simple Guide</title>
+  <style>
+    :root{
+      --bg:#0b1220; --panel:#0f172a; --ink:#e5e7eb; --muted:#a3a3a3; --accent:#60a5fa; --good:#34d399; --wire:#93c5fd; --chip:#1f2937;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto; color:var(--ink); background:linear-gradient(180deg,#0b1220 0,#0b1220 60%,#0a1020 100%);} 
+    .wrap{max-width:1000px; margin:auto; padding:32px 16px 80px}
+    h1{font-size:clamp(28px,3.6vw,40px); margin:0 0 6px; letter-spacing:.2px}
+    h2{margin:28px 0 8px; font-size:clamp(20px,2.4vw,26px)}
+    h3{margin:20px 0 8px; font-size:20px}
+    p{margin:10px 0}
+    .card{background:var(--panel); border:1px solid #1f2937; border-radius:18px; padding:20px; box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .grid{display:grid; gap:16px}
+    .g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .muted{color:var(--muted)}
+    .chip{background:var(--chip); border:1px solid #374151; border-radius:10px; padding:12px}
+    table{width:100%; border-collapse:collapse; background:#0b1326; border:1px solid #1f2a44; border-radius:12px; overflow:hidden}
+    th,td{padding:10px 8px; text-align:center; border-bottom:1px solid #1f2a44}
+    th{background:#0e1a33; font-weight:600}
+    tr:last-child td{border-bottom:none}
+    code{background:#0e1a2a; padding:2px 6px; border-radius:6px}
+    .svgbox{background:#0a1428; border:1px dashed #24406b; border-radius:12px; padding:10px}
+    .pill{display:inline-block; padding:4px 10px; border-radius:999px; border:1px solid #26456f; font-size:12px; color:#cfe3ff; background:#0b1a33}
+    .kbd{font:600 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; background:#0c1e37; border:1px solid #2b4264; padding:3px 6px; border-radius:6px}
+    .ok{color:var(--good)}
+    .accent{color:var(--accent)}
+    .center{text-align:center}
+    .btn{cursor:pointer; border:none; background:#17487c; color:white; padding:10px 14px; border-radius:10px; font-weight:600}
+    .btn:active{transform:translateY(1px)}
+    .io{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .io label{display:flex; gap:6px; align-items:center; background:#0b1a33; border:1px solid #27446b; padding:8px 10px; border-radius:10px}
+    .out{font:600 16px ui-monospace, SFMono-Regular, Menlo, monospace}
+    .badge{font:600 13px; padding:2px 8px; border-radius:8px; background:#0d233f; border:1px solid #2a4a77}
+    .foot{margin-top:26px; font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Two‑Bit Adder — explained super simply</h1>
+      <p class="muted">We’ll first understand a <strong>full adder</strong> (1‑bit), then chain two of them to make a <strong>two‑bit adder</strong>. You’ll also get an interactive demo and a real‑life analogy.</p>
+    </header>
+
+    <section class="card">
+      <h2>1) What’s a <em>Full Adder</em> (1‑bit)?</h2>
+      <p>A full adder takes three 1‑bit inputs — <span class="pill">A</span>, <span class="pill">B</span>, and <span class="pill">Cin</span> (carry‑in) — and outputs a 1‑bit <span class="pill">Sum</span> and a 1‑bit <span class="pill">Cout</span> (carry‑out).</p>
+      <div class="grid g2" style="align-items:start">
+        <div class="svgbox">
+          <!-- Block diagram of full adder -->
+          <svg viewBox="0 0 520 200" width="100%" height="180" aria-label="Full Adder Diagram">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#93c5fd" />
+              </marker>
+            </defs>
+            <rect x="155" y="30" width="210" height="140" rx="14" fill="#1f2937" stroke="#36547f" />
+            <text x="260" y="55" fill="#cfe3ff" text-anchor="middle" font-size="16" font-weight="600">FULL ADDER</text>
+
+            <!-- Inputs -->
+            <text x="20" y="78" fill="#cfe3ff">A</text>
+            <line x1="35" y1="75" x2="155" y2="75" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow)"/>
+            <text x="20" y="108" fill="#cfe3ff">B</text>
+            <line x1="35" y1="105" x2="155" y2="105" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow)"/>
+            <text x="15" y="138" fill="#cfe3ff">Cin</text>
+            <line x1="35" y1="135" x2="155" y2="135" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow)"/>
+
+            <!-- Outputs -->
+            <text x="440" y="98" fill="#cfe3ff">Sum</text>
+            <line x1="365" y1="95" x2="430" y2="95" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow)"/>
+            <text x="440" y="138" fill="#cfe3ff">Cout</text>
+            <line x1="365" y1="135" x2="430" y2="135" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow)"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Logic (no scary math)</h3>
+          <p><span class="pill">Sum</span> is “odd count of 1s”: it becomes 1 if an odd number of inputs are 1. That’s exactly what <code>XOR</code> does.</p>
+          <p><span class="pill">Cout</span> is 1 if at least two inputs are 1 (because adding two 1s makes a carry). That’s a simple “majority of three”.</p>
+          <div class="chip">
+            <p class="center"><strong>Formulas</strong></p>
+            <p><span class="accent">Sum</span> = A ⊕ B ⊕ Cin</p>
+            <p><span class="accent">Cout</span> = (A·B) + (A·Cin) + (B·Cin)</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Full Adder Truth Table</h3>
+      <div class="card" style="padding:0">
+        <table aria-label="Full adder truth table">
+          <thead>
+            <tr><th>A</th><th>B</th><th>Cin</th><th>Sum</th><th>Cout</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+            <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2) Building a <em>Two‑Bit Adder</em> from 2 Full Adders</h2>
+      <p>We place two full adders in a row. The first adds the <strong>lowest bits</strong> (LSB), and its <span class="pill">Cout</span> becomes the next adder’s <span class="pill">Cin</span>. That makes a simple ripple‑carry adder.</p>
+      <div class="svgbox">
+        <!-- Two-bit ripple-carry diagram -->
+        <svg viewBox="0 0 860 240" width="100%" height="210" aria-label="Two-bit ripple carry diagram">
+          <defs>
+            <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#93c5fd" />
+            </marker>
+          </defs>
+          <!-- FA0 -->
+          <rect x="170" y="40" width="220" height="130" rx="14" fill="#1f2937" stroke="#36547f"/>
+          <text x="280" y="60" fill="#cfe3ff" text-anchor="middle" font-size="14" font-weight="600">FULL ADDER (bit 0)</text>
+          <text x="40" y="95" fill="#cfe3ff">A0</text>
+          <line x1="60" y1="92" x2="170" y2="92" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow2)"/>
+          <text x="40" y="125" fill="#cfe3ff">B0</text>
+          <line x1="60" y1="122" x2="170" y2="122" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow2)"/>
+          <text x="36" y="155" fill="#cfe3ff">Cin</text>
+          <line x1="60" y1="152" x2="170" y2="152" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow2)"/>
+          <text x="410" y="110" fill="#cfe3ff">S0</text>
+          <line x1="390" y1="107" x2="430" y2="107" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow2)"/>
+
+          <!-- carry wire to next -->
+          <text x="362" y="155" fill="#cfe3ff">C1</text>
+          <line x1="360" y1="152" x2="580" y2="152" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow2)"/>
+
+          <!-- FA1 -->
+          <rect x="580" y="40" width="220" height="130" rx="14" fill="#1f2937" stroke="#36547f"/>
+          <text x="690" y="60" fill="#cfe3ff" text-anchor="middle" font-size="14" font-weight="600">FULL ADDER (bit 1)</text>
+          <text x="472" y="95" fill="#cfe3ff">A1</text>
+          <line x1="490" y1="92" x2="580" y2="92" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow2)"/>
+          <text x="472" y="125" fill="#cfe3ff">B1</text>
+          <line x1="490" y1="122" x2="580" y2="122" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow2)"/>
+          <text x="548" y="156" fill="#cfe3ff">Cin=C1</text>
+          <text x="810" y="110" fill="#cfe3ff">S1</text>
+          <line x1="800" y1="107" x2="840" y2="107" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow2)"/>
+          <text x="810" y="155" fill="#cfe3ff">Cout</text>
+          <line x1="800" y1="152" x2="840" y2="152" stroke="#93c5fd" stroke-width="3" marker-end="url(#arrow2)"/>
+        </svg>
+      </div>
+
+      <div class="grid g2">
+        <div class="chip">
+          <p class="center"><strong>Bit‑by‑bit logic</strong></p>
+          <p><strong>Bit 0:</strong> S0 = A0 ⊕ B0 ⊕ Cin, C1 = majority(A0,B0,Cin)</p>
+          <p><strong>Bit 1:</strong> S1 = A1 ⊕ B1 ⊕ C1, Cout = majority(A1,B1,C1)</p>
+        </div>
+        <div class="chip">
+          <p class="center"><strong>Binary result</strong></p>
+          <p>Outputs are <span class="pill">Cout S1 S0</span> — that’s the two‑bit sum, with an extra carry if it overflows.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3) Real‑life analogy (very easy)</h2>
+      <p>Imagine you and a friend are counting coins into stacks of <strong>two</strong>:</p>
+      <ul>
+        <li><span class="pill">A</span> = you put a coin (1) or not (0)</li>
+        <li><span class="pill">B</span> = friend puts a coin (1) or not (0)</li>
+        <li><span class="pill">Cin</span> = there’s already a carry coin from a previous stack (1) or not (0)</li>
+      </ul>
+      <p>If the total coins on the table at this moment are odd (1 or 3), the <span class="pill">Sum</span> spot gets a coin (1). If you reach two or more coins, you bundle up two and pass <span class="pill">Cout</span> (a carry coin) to the next stack. That’s exactly how the full adder behaves. Two stacks (two full adders) let you count in <strong>two bits</strong>.</p>
+    </section>
+
+    <section class="card">
+      <h2>4) Step‑by‑step example</h2>
+      <p>Add A = <strong>10₂</strong> (2) and B = <strong>11₂</strong> (3) with <span class="pill">Cin=0</span>.</p>
+      <ol>
+        <li><strong>Bit 0:</strong> A0=0, B0=1, Cin=0 → S0 = 1, C1 = 0</li>
+        <li><strong>Bit 1:</strong> A1=1, B1=1, Cin=C1=0 → S1 = 0, Cout = 1</li>
+      </ol>
+      <p class="ok">Result = <strong>Cout S1 S0 = 1 0 1</strong> = <strong>5</strong> — correct because 2 + 3 = 5.</p>
+    </section>
+
+    <section class="card">
+      <h2>5) Try it yourself (interactive)</h2>
+      <p class="muted">Toggle the inputs. The logic below matches your Logisim design (XOR for sums; AND/OR for carries via majority).</p>
+      <div class="io" role="group" aria-label="Two-bit adder inputs">
+        <label><input type="checkbox" id="A1"> A1</label>
+        <label><input type="checkbox" id="A0"> A0</label>
+        <label><input type="checkbox" id="B1"> B1</label>
+        <label><input type="checkbox" id="B0"> B0</label>
+        <label><input type="checkbox" id="Cin"> Cin</label>
+        <button class="btn" id="clr">Clear</button>
+      </div>
+      <div class="grid g2" style="margin-top:14px">
+        <div class="chip">
+          <div><span class="badge">Bit 0</span></div>
+          <div class="out" id="bit0">S0=?, C1=?</div>
+        </div>
+        <div class="chip">
+          <div><span class="badge">Bit 1</span></div>
+          <div class="out" id="bit1">S1=?, Cout=?</div>
+        </div>
+        <div class="chip">
+          <div><span class="badge">Final</span></div>
+          <div class="out" id="final">Cout S1 S0 = ? ? ? (decimal = ?)</div>
+        </div>
+      </div>
+      <div class="foot muted">Tip: Think of <span class="kbd">⊕</span> as “odd ones → output 1”.</div>
+    </section>
+
+    <section class="card">
+      <h2>6) How this maps to your chips</h2>
+      <ul>
+        <li><strong>7486 (XOR)</strong>: makes <span class="pill">Sum</span> bits (A ⊕ B ⊕ Cin).</li>
+        <li><strong>7408 (AND)</strong> + <strong>7432 (OR)</strong>: combine pairs (A·B, A·Cin, B·Cin) to create <span class="pill">Carry</span>.</li>
+        <li>Two identical full‑adder blocks chained → your <strong>two‑bit adder</strong>.</li>
+      </ul>
+    </section>
+
+    <footer class="center muted" style="margin-top:30px">Built for clarity — copy this file as notes for exams or labs.</footer>
+  </div>
+
+  <script>
+    const ids = ['A1','A0','B1','B0','Cin'];
+    const qs = id => document.getElementById(id);
+    const val = id => qs(id).checked ? 1 : 0;
+
+    function xor3(a,b,c){return (a ^ b) ^ c}
+    function majority(a,b,c){return (a & b) | (a & c) | (b & c)}
+
+    function update(){
+      const A1=val('A1'), A0=val('A0'), B1=val('B1'), B0=val('B0'), Cin=val('Cin');
+      // bit 0
+      const S0 = xor3(A0,B0,Cin);
+      const C1 = majority(A0,B0,Cin);
+      // bit 1
+      const S1 = xor3(A1,B1,C1);
+      const Cout = majority(A1,B1,C1);
+      // decimal
+      const dec = (Cout<<2) | (S1<<1) | S0;
+      qs('bit0').textContent = `S0=${S0}, C1=${C1}`;
+      qs('bit1').textContent = `S1=${S1}, Cout=${Cout}`;
+      qs('final').textContent = `Cout S1 S0 = ${Cout} ${S1} ${S0} (decimal = ${dec})`;
+    }
+
+    ids.forEach(id=>qs(id).addEventListener('change', update));
+    qs('clr').addEventListener('click', ()=>{ ids.forEach(id=>qs(id).checked=false); update(); });
+    update();
+  </script>
+</body>
+</html>

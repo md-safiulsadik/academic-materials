@@ -13,7 +13,8 @@ public class Student {
     void getData(){
         System.out.println("ID: "+this.id+", CGPA: "+this.cgpa+", Name: "+this.name+" Marks:"+this.marks);
     }
-    float assignMarks(float x){
+
+    float assignMarks(float x) {
         this.marks = this.marks+x;
         return this.marks;
     }
