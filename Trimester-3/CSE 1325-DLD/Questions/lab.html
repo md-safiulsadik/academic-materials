@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lab Report — Full Adder and Multi-bit Adders</title>
+  <style>
+    body{font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; max-width:900px;margin:28px auto;color:#111}
+    header{border-bottom:1px solid #ddd;padding-bottom:12px;margin-bottom:18px}
+    h1{font-size:1.6rem;margin:0}
+    h2{color:#0b3b66}
+    pre{background:#f7f7f7;padding:10px;border-radius:6px;overflow:auto}
+    table{border-collapse:collapse;width:100%;margin:8px 0}
+    th,td{border:1px solid #ccc;padding:8px;text-align:center}
+    .diagram{background:#fff;border:1px solid #eee;padding:12px;border-radius:6px;margin:12px 0}
+    .note{background:#eef9ff;border-left:4px solid #6fb3e6;padding:10px;margin:10px 0}
+    .code-block{background:#111;color:#fff;padding:10px;border-radius:6px;font-family:monospace}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lab Report: Full Adder & Multi-bit Adders</h1>
+    <p><strong>Student:</strong> __________________ &nbsp; | &nbsp; <strong>Date:</strong> __________________</p>
+    <p>Course: Digital Logic Lab &nbsp; | &nbsp; Submission: softcopy (PDF) — this HTML contains the full content to convert to PDF.</p>
+  </header>
+
+  <section>
+    <h2>1. Objective</h2>
+    <p>Understand and design a 1-bit full adder (truth table, logic equations and hardware using XOR gates), and implement multi-bit adders in Logisim using:</p>
+    <ul>
+      <li>4 × 1-bit full adders (ripple-carry 4-bit adder)</li>
+      <li>2 × 2-bit full adders (compose two 2-bit blocks)</li>
+      <li>1 × 4-bit full adder module (single 4-bit adder block)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>2. 1-bit Full Adder — Truth Table</h2>
+    <p>Inputs: A, B, Cin (carry-in). Outputs: Sum (S) and Carry-out (Cout).</p>
+    <table>
+      <thead>
+        <tr><th>A</th><th>B</th><th>Cin</th><th>Sum (S)</th><th>Cout</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+        <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+        <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+        <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+        <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+        <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+        <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>3. Logic equations</h2>
+    <p>
+      The full adder outputs can be expressed as:
+    </p>
+    <ul>
+      <li><strong>Sum</strong>: S = A ⊕ B ⊕ Cin</li>
+      <li><strong>Carry-out</strong>: Cout = (A &amp; B) | (Cin &amp; (A ⊕ B))</li>
+    </ul>
+    <p>Alternate (expanded) boolean form for Cout: Cout = A·B + A·Cin + B·Cin.</p>
+  </section>
+
+  <section>
+    <h2>4. Hardware Circuit Diagram — 1-bit Full Adder using XOR (Sum and Cout)</h2>
+    <p>Below is a compact schematic implemented with two XOR gates, two AND gates and one OR gate using the standard decomposition that directly follows the equations above.</p>
+
+    <div class="diagram">
+      <!-- SVG diagram of a 1-bit full adder -->
+      <svg width="720" height="220" viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg">
+        <!-- labels -->
+        <text x="20" y="25" font-size="14">A</text>
+        <text x="20" y="75" font-size="14">B</text>
+        <text x="20" y="125" font-size="14">Cin</text>
+
+        <!-- wires -->
+        <line x1="40" y1="25" x2="140" y2="25" stroke="#333" stroke-width="2"/>
+        <line x1="40" y1="75" x2="140" y2="75" stroke="#333" stroke-width="2"/>
+        <line x1="40" y1="125" x2="140" y2="125" stroke="#333" stroke-width="2"/>
+
+        <!-- XOR1 for A xor B -->
+        <g transform="translate(140,5)">
+          <rect x="0" y="10" width="90" height="60" rx="6" fill="#f3f7fb" stroke="#6ca0d6"/>
+          <text x="10" y="45" font-size="12">XOR (A ⊕ B)</text>
+        </g>
+        <line x1="230" y1="45" x2="330" y2="45" stroke="#333" stroke-width="2"/>
+
+        <!-- XOR2 for (A xor B) xor Cin -> Sum -->
+        <g transform="translate(330,0)">
+          <rect x="0" y="10" width="110" height="80" rx="6" fill="#fef8f0" stroke="#e6a24a"/>
+          <text x="8" y="40" font-size="12">XOR ((A ⊕ B) ⊕ Cin)</text>
+          <text x="8" y="56" font-size="12">-> Sum (S)</text>
+        </g>
+        <line x1="440" y1="50" x2="560" y2="50" stroke="#333" stroke-width="2"/>
+        <text x="570" y="54" font-size="12">S</text>
+
+        <!-- AND A&B -->
+        <g transform="translate(140,90)">
+          <rect x="0" y="10" width="90" height="40" rx="6" fill="#f7fbf3" stroke="#78b36a"/>
+          <text x="10" y="36" font-size="12">AND (A &amp; B)</text>
+        </g>
+        <line x1="230" y1="110" x2="330" y2="110" stroke="#333" stroke-width="2"/>
+
+        <!-- AND Cin & (A xor B) -->
+        <g transform="translate(330,100)">
+          <rect x="0" y="10" width="140" height="40" rx="6" fill="#fff7f7" stroke="#d66a6a"/>
+          <text x="8" y="36" font-size="12">AND (Cin &amp; (A ⊕ B))</text>
+        </g>
+        <line x1="470" y1="120" x2="560" y2="120" stroke="#333" stroke-width="2"/>
+
+        <!-- OR for Cout -->
+        <g transform="translate(560,90)">
+          <rect x="0" y="10" width="120" height="60" rx="6" fill="#f3f7ff" stroke="#8a6ed6"/>
+          <text x="8" y="40" font-size="12">OR -> Cout</text>
+        </g>
+        <text x="690" y="132" font-size="12">Cout</text>
+
+        <!-- connector lines from XOR1 to XOR2 and to AND(P) -->
+        <line x1="180" y1="45" x2="180" y2="110" stroke="#333" stroke-width="2" stroke-dasharray="4 3"/>
+        <circle cx="180" cy="110" r="3" fill="#333"/>
+
+        <!-- join Cin to XOR2 and to AND(Cin*(A xor B)) -->
+        <line x1="140" y1="125" x2="330" y2="125" stroke="#333" stroke-width="2"/>
+
+        <!-- join A and B downward to AND(A&B) -->
+        <line x1="90" y1="25" x2="90" y2="110" stroke="#333" stroke-width="2"/>
+        <line x1="90" y1="75" x2="90" y2="110" stroke="#333" stroke-width="2"/>
+
+        <!-- small labels -->
+        <text x="300" y="20" font-size="11">(A ⊕ B)</text>
+      </svg>
+      <p style="margin-top:8px"><em>Figure:</em> Logical block diagram (conceptual) for a 1-bit full adder using XOR, AND and OR blocks. In Logisim you will use XOR, AND and OR components wired exactly as the equations above.</p>
+    </div>
+
+    <div class="note">
+      <strong>How it works (short):</strong> XOR1 produces A ⊕ B. XOR2 then combines that with Cin to produce S. AND(A,B) and AND(Cin, A⊕B) detect cases that produce a carry; OR combines them to produce Cout.
+    </div>
+  </section>
+
+  <section>
+    <h2>5. Implementations in Logisim — designs and explanation</h2>
+    <p>All designs below use the 1-bit full adder as the basic building block. For multi-bit adders we typically use ripple-carry configuration where the Cout of the less-significant bit becomes the Cin of the next bit.</p>
+
+    <h3>a) 4 × 1-bit full adders (4-bit ripple adder)</h3>
+    <p>Connect four 1-bit full adders in series (LSB at the right or left depending on your convention). Example wiring (bit positions shown):</p>
+    <pre class="code-block">A3 A2 A1 A0  (4-bit input A)
+B3 B2 B1 B0  (4-bit input B)
+Cin -> FA0 -> FA1 -> FA2 -> FA3 -> Cout
+Where FA0 handles A0,B0 with Cin (initial carry-in), FA1 uses Cout0 as Cin1, etc.</pre>
+
+    <svg width="720" height="140" viewBox="0 0 720 140" xmlns="http://www.w3.org/2000/svg">
+      <text x="8" y="18" font-size="12">A3 A2 A1 A0</text>
+      <text x="8" y="38" font-size="12">B3 B2 B1 B0</text>
+      <!-- Four blocks -->
+      <g transform="translate(120,5)">
+        <rect x="0" y="8" width="110" height="44" rx="6" fill="#fff" stroke="#999"/>
+        <text x="28" y="34" font-size="12">FA0 (LSB)</text>
+      </g>
+      <g transform="translate(240,5)">
+        <rect x="0" y="8" width="110" height="44" rx="6" fill="#fff" stroke="#999"/>
+        <text x="28" y="34" font-size="12">FA1</text>
+      </g>
+      <g transform="translate(360,5)">
+        <rect x="0" y="8" width="110" height="44" rx="6" fill="#fff" stroke="#999"/>
+        <text x="28" y="34" font-size="12">FA2</text>
+      </g>
+      <g transform="translate(480,5)">
+        <rect x="0" y="8" width="110" height="44" rx="6" fill="#fff" stroke="#999"/>
+        <text x="28" y="34" font-size="12">FA3 (MSB)</text>
+      </g>
+
+      <line x1="190" y1="70" x2="250" y2="70" stroke="#333" stroke-width="2"/>
+      <line x1="310" y1="70" x2="370" y2="70" stroke="#333" stroke-width="2"/>
+      <line x1="430" y1="70" x2="490" y2="70" stroke="#333" stroke-width="2"/>
+      <text x="540" y="72" font-size="12">Cout</text>
+    </svg>
+
+    <p><strong>Notes for Logisim:</strong></p>
+    <ol>
+      <li>Place four copies of your 1-bit full adder subcircuit. Label inputs A0..A3 and B0..B3.</li>
+      <li>Wire FA0.Cout to FA1.Cin, FA1.Cout to FA2.Cin, FA2.Cout to FA3.Cin.</li>
+      <li>Test vectors: try A=0110 (6), B=0101 (5), Cin=0 → expected Sum=1011 (11) and Cout=0.</li>
+    </ol>
+
+    <h3>b) 2 × 2-bit full adders (two 2-bit blocks)</h3>
+    <p>Build a 2-bit adder by connecting two 1-bit FAs. Then instantiate two identical 2-bit adders and connect them as higher and lower halves if needed. This is just grouping: a 2-bit adder has inputs A1:A0, B1:B0 and a carry in, with result S1:S0 and carry out.</p>
+
+    <h3>c) 1 × 4-bit full adder block</h3>
+    <p>Create a subcircuit named <code>4bit_adder</code> that contains the four 1-bit FAs and exposes 4-bit buses (or individual pins) for A[3..0], B[3..0], Cin and outputs Sum[3..0], Cout. This greatly simplifies wiring in larger designs.</p>
+
+    <div class="note">
+      <strong>Tip:</strong> In Logisim, you can group wires into buses for clarity (select wires, use the Split and Join components when necessary). Label every signal and test with multiple binary patterns to ensure correctness.
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Example test vectors and expected results</h2>
+    <table>
+      <thead><tr><th>A</th><th>B</th><th>Cin</th><th>Binary Sum</th><th>Decimal (A+B+Cin)</th><th>Cout</th></tr></thead>
+      <tbody>
+        <tr><td>0011 (3)</td><td>0101 (5)</td><td>0</td><td>1000 (8)</td><td>8</td><td>0</td></tr>
+        <tr><td>0110 (6)</td><td>0101 (5)</td><td>0</td><td>1011 (11)</td><td>11</td><td>0</td></tr>
+        <tr><td>1111 (15)</td><td>0001 (1)</td><td>0</td><td>0000 (0)</td><td>0 (mod 16)</td><td>1</td></tr>
+        <tr><td>1111 (15)</td><td>1111 (15)</td><td>1</td><td>1111 (15)</td><td>31</td><td>1</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>7. Conclusions</h2>
+    <p>The full adder is a fundamental digital building block. Using XORs for the Sum and a combination of AND/OR gates for Cout yields a compact implementation. Multi-bit adders are built by cascading 1-bit adders (ripple-carry); while simple, they have linear delay with the number of bits due to carry propagation.</p>
+    <p>For faster adders (beyond this lab): look into carry-lookahead adders or carry-select adders (advanced topics).</p>
+  </section>
+
+  <section>
+    <h2>8. Appendix — Boolean simplification & Derivation</h2>
+    <p>Start from S = A ⊕ B ⊕ Cin. For Cout: Cout = majority(A,B,Cin). Expanding: Cout = A·B + A·Cin + B·Cin. Using the A⊕B helper, Cout = (A·B) + (Cin &amp; (A ⊕ B)).</p>
+  </section>
+
+  <footer style="margin-top:20px;border-top:1px solid #eee;padding-top:10px">
+    <small>Prepared by: Digital Logic Lab student. Slide reference image used to create the report.</small>
+  </footer>
+</body>
+</html>

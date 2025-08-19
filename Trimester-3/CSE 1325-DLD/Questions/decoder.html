@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-to-8 Decoder using 74-series ICs in Logisim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .circuit-diagram {
+            font-family: monospace;
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">3-to-8 Decoder from 2-to-4 Decoders</h1>
+            <p class="text-lg text-gray-600 mt-2">A Logisim Implementation using 74-series Logic</p>
+        </header>
+
+        <main>
+            <!-- Component Section -->
+            <section class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Components Used</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <h3 class="font-bold text-lg text-blue-800">74LS139: Dual 2-to-4 Decoder/Demultiplexer</h3>
+                        <p class="mt-2 text-gray-700">This IC is perfect for the task as it contains two independent 2-to-4 decoders. We'll use both decoders within a single chip to create our larger 3-to-8 decoder.</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h3 class="font-bold text-lg text-green-800">74LS04: Hex Inverter (NOT Gate)</h3>
+                        <p class="mt-2 text-gray-700">This IC contains six NOT gates. We only need one to invert the most significant input bit, which will be used to select between the two decoders.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Circuit Diagram Section -->
+            <section class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Logisim Circuit Diagram</h2>
+                <div class="bg-gray-100 p-4 rounded-lg overflow-x-auto">
+                    <!-- SVG representation of the Logisim diagram -->
+                    <svg width="100%" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" class="circuit-diagram">
+                        <!-- Styles for the diagram elements -->
+                        <style>
+                            .wire { stroke: #3B82F6; stroke-width: 2; fill: none; }
+                            .component { fill: #F3F4F6; stroke: #4B5563; stroke-width: 2; }
+                            .label { font-size: 14px; font-family: 'Inter', sans-serif; fill: #1F2937; }
+                            .pin-label { font-size: 12px; font-family: 'Inter', sans-serif; fill: #4B5563; }
+                        </style>
+                        
+                        <!-- Inputs -->
+                        <text x="20" y="55" class="label font-bold">A</text>
+                        <line x1="30" y1="50" x2="100" y2="50" class="wire" />
+                        <text x="20" y="105" class="label font-bold">B</text>
+                        <line x1="30" y1="100" x2="100" y2="100" class="wire" />
+                        <text x="20" y="255" class="label font-bold">C (MSB)</text>
+                        <line x1="30" y1="250" x2="100" y2="250" class="wire" />
+
+                        <!-- Decoder 1 (74LS139 - Section 1) -->
+                        <rect x="150" y="30" width="120" height="120" rx="8" class="component" />
+                        <text x="165" y="25" class="pin-label">Decoder 1</text>
+                        <text x="155" y="55" class="pin-label">A0</text>
+                        <text x="155" y="105" class="pin-label">A1</text>
+                        <text x="200" y="160" class="pin-label">/E</text>
+                        <line x1="100" y1="50" x2="150" y2="50" class="wire" />
+                        <line x1="100" y1="100" x2="150" y2="100" class="wire" />
+                        
+                        <!-- Decoder 2 (74LS139 - Section 2) -->
+                        <rect x="150" y="200" width="120" height="120" rx="8" class="component" />
+                        <text x="165" y="195" class="pin-label">Decoder 2</text>
+                        <text x="155" y="225" class="pin-label">A0</text>
+                        <text x="155" y="275" class="pin-label">A1</text>
+                        <text x="200" y="330" class="pin-label">/E</text>
+                        <line x1="120" y1="50" x2="150" y2="220" class="wire" />
+                        <line x1="120" y1="100" x2="150" y2="270" class="wire" />
+                        <line x1="100" y1="50" x2="120" y2="50" class="wire" />
+                        <line x1="100" y1="100" x2="120" y2="100" class="wire" />
+                        <circle cx="120" cy="50" r="3" fill="#3B82F6" />
+                        <circle cx="120" cy="100" r="3" fill="#3B82F6" />
+
+                        <!-- Enable Logic -->
+                        <line x1="100" y1="250" x2="210" y2="250" class="wire" />
+                        <line x1="210" y1="250" x2="210" y2="150" class="wire" /> <!-- C to Decoder 1 Enable -->
+                        <circle cx="210" cy="250" r="3" fill="#3B82F6" />
+
+                        <!-- NOT Gate (74LS04) -->
+                        <path d="M 200 280 L 220 290 L 200 300 Z" class="component" />
+                        <circle cx="225" cy="290" r="5" class="component" />
+                        <line x1="210" y1="250" x2="210" y2="290" class="wire" />
+                        <line x1="210" y1="290" x2="200" y2="290" class="wire" />
+                        <line x1="230" y1="290" x2="250" y2="290" class="wire" />
+                        <line x1="250" y1="290" x2="250" y2="320" class="wire" />
+                        <line x1="250" y1="320" x2="210" y2="320" class="wire" /> <!-- Inverted C to Decoder 2 Enable -->
+
+                        <!-- Outputs -->
+                        <line x1="270" y1="45" x2="350" y2="45" class="wire" /><text x="360" y="50" class="label font-bold">Y0</text>
+                        <line x1="270" y1="70" x2="350" y2="70" class="wire" /><text x="360" y="75" class="label font-bold">Y1</text>
+                        <line x1="270" y1="95" x2="350" y2="95" class="wire" /><text x="360" y="100" class="label font--bold">Y2</text>
+                        <line x1="270" y1="120" x2="350" y2="120" class="wire" /><text x="360" y="125" class="label font-bold">Y3</text>
+                        
+                        <line x1="270" y1="215" x2="350" y2="215" class="wire" /><text x="360" y="220" class="label font-bold">Y4</text>
+                        <line x1="270" y1="240" x2="350" y2="240" class="wire" /><text x="360" y="245" class="label font-bold">Y5</text>
+                        <line x1="270" y1="265" x2="350" y2="265" class="wire" /><text x="360" y="270" class="label font-bold">Y6</text>
+                        <line x1="270" y1="290" x2="350" y2="290" class="wire" /><text x="360" y="295" class="label font-bold">Y7</text>
+                    </svg>
+                </div>
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                    <h3 class="font-semibold text-lg">Circuit Logic Explained</h3>
+                    <p class="mt-2 text-gray-700">The most significant bit, **C**, acts as the master switch.
+                    <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
+                        <li>When **C = 0**, the top decoder is enabled (since its `/E` pin is active-low), and it decodes inputs A and B to activate one of the outputs from **Y0 to Y3**.</li>
+                        <li>When **C = 1**, the signal is inverted by the NOT gate to become 0. This enables the bottom decoder, which decodes inputs A and B to activate one of the outputs from **Y4 to Y7**.</li>
+                    </ul>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Truth Table Section -->
+            <section class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">Truth Table</h2>
+                <p class="text-gray-600 mb-4">This table shows which output line is selected for each combination of inputs. The 74LS139 has active-LOW outputs, so the selected output is '0' while all others are '1'.</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th colspan="3" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Inputs</th>
+                                <th colspan="8" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Outputs (Active LOW)</th>
+                            </tr>
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">C</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">B</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">A</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Y0</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Y1</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Y2</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Y3</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Y4</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Y5</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Y6</th>
+                                <th class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Y7</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200 text-center">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">0</td><td class="px-6 py-4 whitespace-nowrap">0</td><td class="px-6 py-4 whitespace-nowrap">0</td>
+                                <td class="px-2 py-4 font-bold text-red-600">0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">0</td><td class="px-6 py-4 whitespace-nowrap">0</td><td class="px-6 py-4 whitespace-nowrap">1</td>
+                                <td>1</td><td class="px-2 py-4 font-bold text-red-600">0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">0</td><td class="px-6 py-4 whitespace-nowrap">1</td><td class="px-6 py-4 whitespace-nowrap">0</td>
+                                <td>1</td><td>1</td><td class="px-2 py-4 font-bold text-red-600">0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">0</td><td class="px-6 py-4 whitespace-nowrap">1</td><td class="px-6 py-4 whitespace-nowrap">1</td>
+                                <td>1</td><td>1</td><td>1</td><td class="px-2 py-4 font-bold text-red-600">0</td><td>1</td><td>1</td><td>1</td><td>1</td>
+                            </tr>
+                            <tr class="bg-gray-100 hover:bg-gray-200">
+                                <td class="px-6 py-4 whitespace-nowrap">1</td><td class="px-6 py-4 whitespace-nowrap">0</td><td class="px-6 py-4 whitespace-nowrap">0</td>
+                                <td>1</td><td>1</td><td>1</td><td>1</td><td class="px-2 py-4 font-bold text-red-600">0</td><td>1</td><td>1</td><td>1</td>
+                            </tr>
+                            <tr class="bg-gray-100 hover:bg-gray-200">
+                                <td class="px-6 py-4 whitespace-nowrap">1</td><td class="px-6 py-4 whitespace-nowrap">0</td><td class="px-6 py-4 whitespace-nowrap">1</td>
+                                <td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td class="px-2 py-4 font-bold text-red-600">0</td><td>1</td><td>1</td>
+                            </tr>
+                            <tr class="bg-gray-100 hover:bg-gray-200">
+                                <td class="px-6 py-4 whitespace-nowrap">1</td><td class="px-6 py-4 whitespace-nowrap">1</td><td class="px-6 py-4 whitespace-nowrap">0</td>
+                                <td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td class="px-2 py-4 font-bold text-red-600">0</td><td>1</td>
+                            </tr>
+                            <tr class="bg-gray-100 hover:bg-gray-200">
+                                <td class="px-6 py-4 whitespace-nowrap">1</td><td class="px-6 py-4 whitespace-nowrap">1</td><td class="px-6 py-4 whitespace-nowrap">1</td>
+                                <td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td class="px-2 py-4 font-bold text-red-600">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-8 py-4 border-t">
+            <p class="text-sm text-gray-500">Generated to demonstrate digital logic design principles.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
