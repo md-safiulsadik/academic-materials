@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Majority Function</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body class="p-8">
+    <div class="container mx-auto bg-white rounded-lg shadow-xl p-10">
+        <h1 class="text-4xl font-bold text-center mb-6 text-gray-800">Three-Input Majority Function</h1>
+        <p class="text-center text-gray-600 mb-8">
+            This document outlines the step-by-step analysis and circuit design for a three-input majority function.
+        </p>
+
+        <!-- Truth Table Section -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-semibold mb-4 border-b-2 border-indigo-400 pb-2">
+                (i) Truth Table
+            </h2>
+            <p class="mb-4">
+                A three-input majority function has an output of 1 when two or all three of its inputs are 1. The inputs are designated as A, B, and C, and the output as F.
+            </p>
+            <div class="overflow-x-auto rounded-lg shadow-md">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                A (Input)
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                B (Input)
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                C (Input)
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                F (Output)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">0</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">0</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">0</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">0</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">0</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">0</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">0</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">0</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">0</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">0</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">0</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm text-red-500 font-bold">1</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">0</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">0</td><td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">0</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">0</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm text-red-500 font-bold">1</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">0</td><td class="px-6 py-4 whitespace-nowrap text-sm text-red-500 font-bold">1</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900">1</td><td class="px-6 py-4 whitespace-nowrap text-sm text-red-500 font-bold">1</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- K-map Section -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-semibold mb-4 border-b-2 border-indigo-400 pb-2">
+                (ii) K-map of the Function
+            </h2>
+            <p class="mb-4">
+                The Karnaugh map (K-map) is used to graphically simplify boolean expressions. To find the Product-of-Sum (POS) form, we group the 0s in the K-map.
+            </p>
+            <div class="flex justify-center items-center">
+                
+            </div>
+            <p class="mt-4 text-center font-mono">
+                The K-map shows the 0s at positions 000, 001, 010, and 100.
+            </p>
+        </div>
+
+        <!-- Simplified POS Expression Section -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-semibold mb-4 border-b-2 border-indigo-400 pb-2">
+                (iii) Simplified Product-of-Sum (POS) Form
+            </h2>
+            <p class="mb-4">
+                To find the simplified POS expression, we identify groups of adjacent 0s from the K-map.
+            </p>
+            <ul class="list-disc list-inside space-y-2 mb-4">
+                <li>Grouping the 0s at minterms 000 and 001 gives the sum term: $(A+B)$.</li>
+                <li>Grouping the 0s at minterms 000 and 010 gives the sum term: $(A+C)$.</li>
+                <li>Grouping the 0s at minterms 000 and 100 gives the sum term: $(B+C)$.</li>
+            </ul>
+            <p class="mb-4">
+                The simplified POS expression is the product of these sum terms.
+            </p>
+            <div class="bg-gray-100 p-4 rounded-md font-mono text-lg text-center overflow-x-auto">
+                <p>
+                    $F = (A+B)(A+C)(B+C)$
+                </p>
+            </div>
+        </div>
+
+        <!-- Circuit Diagram Section -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-semibold mb-4 border-b-2 border-indigo-400 pb-2">
+                (iv) Circuit Diagram
+            </h2>
+            <p class="mb-4">
+                The simplified POS expression is implemented using a circuit of three OR gates followed by one AND gate.
+            </p>
+            <div class="flex justify-center items-center">
+                
+            </div>
+            <p class="mt-4">
+                The circuit consists of:
+            </p>
+            <ul class="list-disc list-inside space-y-2">
+                <li>An OR gate with inputs A and B.</li>
+                <li>An OR gate with inputs A and C.</li>
+                <li>An OR gate with inputs B and C.</li>
+                <li>An AND gate that takes the outputs of the three OR gates as its inputs to produce the final output F.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
