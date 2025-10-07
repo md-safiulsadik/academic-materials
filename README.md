@@ -1,4 +1,4 @@
-<h1 align="center">🎓 Academic Materials Backup</h1>
+# 🎓 Academic Materials Backup
 
 > 📚 **A centralized, organized archive for all my university study materials, notes, code, assignments, and projects.**  
 > 👨‍💻 _Department of Computer Science & Engineering | Structured by Trimester & Course_
@@ -71,12 +71,12 @@ The repository is organized by academic trimester and course, typically containi
 ## 🚀 How I’m Learning / Approach / Usage
 
 **My Approach:**
-- I organize each trimester and subject in its own directory for clarity.
-- Code is written from scratch to reinforce learning and is accompanied by inline explanations.
-- Lab reports and assignments follow academic guidelines and often include both code and theory.
+- Each trimester and subject is organized in its own directory for clarity.
+- Code is written from scratch to reinforce learning, with inline explanations and comments.
+- Lab reports and assignments follow academic guidelines, including both code and theoretical analysis.
 
 **How to Use This Repo:**
-- **Students:** Browse by trimester/course to find lecture notes, code samples, or assignment templates.
+- **Students:** Browse by trimester/course for lecture notes, code samples, or assignment templates.
 - **Learners:** Reference code and reports for foundational C, Java, and digital electronics.
 - **Review:** Use the HTML and PDF lab reports for logic design and experiment walkthroughs.
 
@@ -119,7 +119,7 @@ int main()
     return 0;
 }
 ```
-*Checks if a number is even or odd, and then tests for specific divisibility. Demonstrates conditional logic in C.*
+*Checks if a number is even or odd, and tests for specific divisibility. Demonstrates conditional logic in C.*
 
 </details>
 
@@ -291,3 +291,6 @@ Pursuing a degree in Computer Science & Engineering is a journey of continuous g
 - **Next Steps:** Continue updating with new trimesters, advanced projects, and deeper lab experiments.
 - **Feedback:** Suggestions and collaboration are welcome!  
 - **License:** [Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+  
+
+**Note:** This README is based on a partial file/folder listing. [See more in the repository.](https://github.com/md-safiulsadik/academic-materials)
